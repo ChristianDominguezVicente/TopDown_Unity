@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private Vector3 puntoInteraccion;
     private Collider2D colliderDelante; //Indica el collider que tenemos por delante.
     private Animator anim;
+    [SerializeField] private GameManagerSO gM;
     [SerializeField] private float velocidadMovimiento;
     [SerializeField] private float radioInteraccion;
 
@@ -23,6 +24,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        transform.position = gM.NewPosition;
+        anim.SetFloat("inputH", gM.NewOrientation.x);
+        anim.SetFloat("inputV", gM.NewOrientation.y);
     }
 
     // Update is called once per frame
@@ -80,8 +84,15 @@ public class Player : MonoBehaviour
         colliderDelante = LanzarCheck();
         if (colliderDelante)
         {
+            //Compruebo si lo que tengo delante es un iteractuable
             if (colliderDelante.TryGetComponent(out Interactuable interactuable))
             {
+                //Si además de ser interactuable es un item...
+                if (interactuable.transform.TryGetComponent(out Item item))
+                {
+                    //Notifico a gM que tenemos un nuevo item.
+                    gM.NewItem(item.ItemData);
+                }
                 interactuable.Interactuar();
             }
         }
