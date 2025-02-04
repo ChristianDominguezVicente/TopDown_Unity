@@ -20,11 +20,15 @@ public class GameManagerSO : ScriptableObject
 
     [NonSerialized] private int collectedCoins;
 
+    private Player currentPlayer;
+
     public SistemaInventario Inventario { get => inventario; }
     public Vector3 NewPosition { get => newPosition; }
     public Vector2 NewOrientation { get => newOrientation; }
     public int CollectedCoins { get => collectedCoins; set => collectedCoins = value; }
     public Dictionary<int, bool> Items { get => items; set => items = value; }
+
+    public Player CurrentPlayer { get => currentPlayer; set => currentPlayer = value; }
 
     private void OnEnable() //Llamadas por EVENTO.
     {

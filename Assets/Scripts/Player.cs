@@ -19,10 +19,12 @@ public class Player : MonoBehaviour
     private bool interactuando;
 
     public bool Interactuando { get => interactuando; set => interactuando = value; }
+    public Animator Anim { get => anim; }
 
     // Start is called before the first frame update
     void Start()
     {
+        gM.CurrentPlayer = this;
         anim = GetComponent<Animator>();
         transform.position = gM.NewPosition;
         anim.SetFloat("inputH", gM.NewOrientation.x);
