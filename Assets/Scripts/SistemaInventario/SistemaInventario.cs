@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SistemaInventario : MonoBehaviour
@@ -13,6 +14,8 @@ public class SistemaInventario : MonoBehaviour
     [SerializeField] private GameManagerSO gM;
 
     [SerializeField] private GameObject InventoryUI;
+
+    [SerializeField] private GameObject panel;
 
     private List<ItemSO> myItems = new List<ItemSO>();
 
@@ -79,8 +82,9 @@ public class SistemaInventario : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && "Inicio" != SceneManager.GetActiveScene().name && !panel.activeSelf)
         {
+            gM.CambiarEstadoPlayer(InventoryUI.activeSelf);
             InventoryUI.SetActive(!InventoryUI.activeSelf);
         }
 

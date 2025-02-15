@@ -14,13 +14,7 @@ public class SaveSystem : MonoBehaviour
 
     [SerializeField] private TMP_Text textoMonedas;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            panel.SetActive(!panel.activeSelf);
-        }
-    }
+    [SerializeField] private GameObject menuInicio;
 
     public void OnSaveButtonClicked()
     {
@@ -45,6 +39,11 @@ public class SaveSystem : MonoBehaviour
         gM.CurrentPlayer.transform.position = new Vector3(loadedData.UltimaPosicionPlayerX, loadedData.UltimaPosicionPlayerY);
         gM.CurrentPlayer.Anim.SetFloat("inputH", loadedData.XOrientation);
         gM.CurrentPlayer.Anim.SetFloat("inputV", loadedData.YOrientation);
+
+        if("Inicio" != SceneManager.GetActiveScene().name)
+        {
+            menuInicio.SetActive(false);
+        }
     }
 
 
@@ -73,6 +72,8 @@ public class SaveSystem : MonoBehaviour
         PersistentData loadedData = formatter.Deserialize(stream) as PersistentData;
 
         stream.Close();
+
+        panel.SetActive(false);
 
         return loadedData;
     }

@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ruinas.unity
     guid: 4faf33d4506f24b4d9b3ac262259fe50
+  - enabled: 1
+    path: Assets/Scenes/Inicio.unity
+    guid: d40d0275bdf75ec4d9bf34d6d2354446
   m_configObjects: {}
