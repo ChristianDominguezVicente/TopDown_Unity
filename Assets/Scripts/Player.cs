@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
+  
     private float inputH;
     private float inputV;
     private bool moviendo;
@@ -12,7 +14,7 @@ public class Player : MonoBehaviour
     private Vector3 puntoInteraccion;
     private Collider2D colliderDelante; //Indica el collider que tenemos por delante.
     private Animator anim;
-    [SerializeField] private GameManagerSO gM;
+    [SerializeField] private GameManagerSO gameManager;
     [SerializeField] private float velocidadMovimiento;
     [SerializeField] private float radioInteraccion;
 
@@ -24,11 +26,11 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gM.CurrentPlayer = this;
+        gameManager.CurrentPlayer = this;
         anim = GetComponent<Animator>();
-        transform.position = gM.NewPosition;
-        anim.SetFloat("inputH", gM.NewOrientation.x);
-        anim.SetFloat("inputV", gM.NewOrientation.y);
+        transform.position = gameManager.NewPosition;
+        anim.SetFloat("inputH", gameManager.NewOrientation.x);
+        anim.SetFloat("inputV", gameManager.NewOrientation.y);
     }
 
     // Update is called once per frame
@@ -93,7 +95,7 @@ public class Player : MonoBehaviour
                 if (interactuable.transform.TryGetComponent(out Item item))
                 {
                     //Notifico a gM que tenemos un nuevo item.
-                    gM.NewItem(item.ItemData);
+                    gameManager.NewItem(item.ItemData);
                 }
                 interactuable.Interactuar();
             }
@@ -110,7 +112,7 @@ public class Player : MonoBehaviour
         }
         //Ante un nuevo destino, necesito refrescar de nuevo puntoInteraccion.
         puntoInteraccion = transform.position + ultimoInput;
-        moviendo= false;
+        moviendo = false;
     }
     private Collider2D LanzarCheck()
     {
