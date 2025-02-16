@@ -53,6 +53,7 @@ public class GameManagerSO : ScriptableObject
     {
         myPlayer = FindObjectOfType<Player>();
         inventario = FindObjectOfType<SistemaInventario>();
+        logros = FindObjectOfType<SistemaMisiones>();
     }
     public void CambiarEstadoPlayer(bool estado)
     {

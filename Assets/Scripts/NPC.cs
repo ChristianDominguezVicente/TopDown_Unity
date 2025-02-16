@@ -220,6 +220,7 @@ public class NPC : MonoBehaviour, Interactuable
     IEnumerator IrHaciaDestinoYEsperar()
     {
         posicionObjetivo = CalcularNuevoDestino();
+        Debug.Log("Mi clave: " + clave);
         //while (true)
         while (!cuadroDialogo.activeSelf)
         {
