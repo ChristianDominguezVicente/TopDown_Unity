@@ -212,7 +212,23 @@ public class NPC : MonoBehaviour, Interactuable
     private void CompletarFrase()
     {
         StopAllCoroutines();
-        textoDialogo.text = frasesSinAlcalde[indiceActual];
+        if (gameManager.MisionAcabada[clave] == true && clave != 4)
+        {
+            textoDialogo.text = frasesConMisionAcabada[indiceActual];
+        }
+        else if (gameManager.MisionAsignada[clave])
+        {
+            textoDialogo.text = frasesConMisionAsignada[indiceActual];
+        }
+        else if (gameManager.HablarAlcalde)
+        {
+            textoDialogo.text = frasesConAlcalde[indiceActual];
+        }
+        else
+        {
+            textoDialogo.text = frasesSinAlcalde[indiceActual];
+        }
+        
         hablando = false;
 
     }
