@@ -17,16 +17,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float radioInteraccion;
 
     private bool interactuando;
+    private bool teclasInvertidas = false;
 
     public bool Interactuando { get => interactuando; set => interactuando = value; }
     public Animator Anim { get => anim; }
+    public float VelocidadMovimiento { get => velocidadMovimiento; set => velocidadMovimiento = value; }
+    public Vector3 UltimoInput { get => ultimoInput; set => ultimoInput = value; }
 
     // Start is called before the first frame update
     void Start()
     {
         gM.CurrentPlayer = this;
         anim = GetComponent<Animator>();
-        transform.position = gM.NewPosition;
         anim.SetFloat("inputH", gM.NewOrientation.x);
         anim.SetFloat("inputV", gM.NewOrientation.y);
     }
@@ -47,6 +49,12 @@ public class Player : MonoBehaviour
             anim.SetBool("andando", true);
             anim.SetFloat("inputH", inputH);
             anim.SetFloat("inputV", inputV);
+
+            if (teclasInvertidas) {
+                inputH = -inputH;
+                inputV = -inputV;
+            }
+
             //Actualizo cual fue mi ultimo input, cual va a ser mi puntoDestino y cual es mi puntoInteraccion. 
             ultimoInput = new Vector3(inputH, inputV, 0);
             puntoDestino = transform.position + ultimoInput;
@@ -54,10 +62,15 @@ public class Player : MonoBehaviour
 
             colliderDelante = LanzarCheck();
 
-            if (!colliderDelante)
-            {
+            if (!colliderDelante) {
                 StartCoroutine(Mover());
             }
+            else if (colliderDelante.CompareTag("Movible") && colliderDelante.TryGetComponent(out ObjetoMovible objetoMovible)) {
+                if (objetoMovible.IntentarMover(ultimoInput)) {
+                    StartCoroutine(Mover()); // Si el objeto se ha movido, el jugador también avanza
+                }
+            }
+
         }
         else if (inputH == 0 && inputV == 0)
         {
@@ -119,5 +132,9 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(puntoInteraccion, radioInteraccion);
+    }
+
+    public void InvertirDirecciones(bool invertir) {
+        teclasInvertidas = invertir;
     }
 }
