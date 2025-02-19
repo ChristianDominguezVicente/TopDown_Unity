@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NPC
   - Pico
+  - Enemigo
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Aliado
+  - Enemigo
   - 
   - 
   - 
