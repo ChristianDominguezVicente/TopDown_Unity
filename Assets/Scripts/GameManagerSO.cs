@@ -9,8 +9,14 @@ public class GameManagerSO : ScriptableObject
 {
     public event Action<ItemSO> OnNewItem;
 
-    private Player player;
+    private Player myPlayer;
     private SistemaInventario inventario;
+    private SistemaMisiones logros;
+    private bool hablarAlcalde;
+    private bool[] misionAsignada = new bool[5];
+    private float[] estadoMisiones = new float[4];
+    private bool[] misionAcabada = new bool[5];
+
 
     [NonSerialized] private Dictionary<int, bool> items = new Dictionary<int, bool>();
 
@@ -23,6 +29,14 @@ public class GameManagerSO : ScriptableObject
     private Player currentPlayer;
 
     public SistemaInventario Inventario { get => inventario; }
+
+    public Player MyPlayer { get => myPlayer; set => myPlayer = value; }
+    public SistemaMisiones Logros { get => logros; set => logros = value; }
+
+    public bool HablarAlcalde { get => hablarAlcalde; set => hablarAlcalde = value; }
+    public float[] EstadoMisiones { get => estadoMisiones; set => estadoMisiones = value; }
+    public bool[] MisionAcabada { get => misionAcabada; set => misionAcabada = value; }
+    public bool[] MisionAsignada { get => misionAsignada; set => misionAsignada = value; }
     public Vector3 NewPosition { get => newPosition; }
     public Vector2 NewOrientation { get => newOrientation; }
     public int CollectedCoins { get => collectedCoins; set => collectedCoins = value; }
@@ -44,12 +58,13 @@ public class GameManagerSO : ScriptableObject
 
     private void NuevaEscenaCargada(Scene arg0, LoadSceneMode arg1)
     {
-        player = FindObjectOfType<Player>();
+        myPlayer = FindObjectOfType<Player>();
         inventario = FindObjectOfType<SistemaInventario>();
+        logros = FindObjectOfType<SistemaMisiones>();
     }
     public void CambiarEstadoPlayer(bool estado)
     {
-        player.Interactuando = !estado;
+        myPlayer.Interactuando = !estado;
     }
     public void LoadNewScene(Vector3 newPosition, Vector2 newOrientation, int newSceneIndex)
     {
@@ -63,8 +78,10 @@ public class GameManagerSO : ScriptableObject
         OnNewItem?.Invoke(itemData);
     }
 
-    // Función para que los enemigos puedan consultar el estado de sigilo del player
+
+    // FunciÃ³n para que los enemigos puedan consultar el estado de sigilo del player
     public bool EstaEnSigilo() {
         return sistemaSigilo != null && sistemaSigilo.EnSigilo;
     }
 }
+

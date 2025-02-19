@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
+  
     private float inputH;
     private float inputV;
     private bool moviendo;
@@ -27,8 +29,9 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gM.CurrentPlayer = this;
+        gameManager.CurrentPlayer = this;
         anim = GetComponent<Animator>();
+
         anim.SetFloat("inputH", gM.NewOrientation.x);
         anim.SetFloat("inputV", gM.NewOrientation.y);
     }
@@ -43,7 +46,7 @@ public class Player : MonoBehaviour
 
     private void MovimientoYAnimaciones()
     {
-        //Ejecuto el movimiento sÛlo si estoy en una casilla y sÛlo si hay input.
+        //Ejecuto el movimiento s√≥lo si estoy en una casilla y s√≥lo si hay input.
         if (!interactuando && !moviendo && (inputH != 0 || inputV != 0))
         {
             anim.SetBool("andando", true);
@@ -67,7 +70,7 @@ public class Player : MonoBehaviour
             }
             else if (colliderDelante.CompareTag("Movible") && colliderDelante.TryGetComponent(out ObjetoMovible objetoMovible)) {
                 if (objetoMovible.IntentarMover(ultimoInput)) {
-                    StartCoroutine(Mover()); // Si el objeto se ha movido, el jugador tambiÈn avanza
+                    StartCoroutine(Mover()); // Si el objeto se ha movido, el jugador tambi√©n avanza
                 }
             }
 
@@ -102,7 +105,7 @@ public class Player : MonoBehaviour
             //Compruebo si lo que tengo delante es un iteractuable
             if (colliderDelante.TryGetComponent(out Interactuable interactuable))
             {
-                //Si adem·s de ser interactuable es un item...
+                //Si adem√°s de ser interactuable es un item...
                 if (interactuable.transform.TryGetComponent(out Item item))
                 {
                     //Notifico a gM que tenemos un nuevo item.
@@ -123,7 +126,7 @@ public class Player : MonoBehaviour
         }
         //Ante un nuevo destino, necesito refrescar de nuevo puntoInteraccion.
         puntoInteraccion = transform.position + ultimoInput;
-        moviendo= false;
+        moviendo = false;
     }
     private Collider2D LanzarCheck()
     {
@@ -138,3 +141,4 @@ public class Player : MonoBehaviour
         teclasInvertidas = invertir;
     }
 }
+

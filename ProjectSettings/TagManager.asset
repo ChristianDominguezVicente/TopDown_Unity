@@ -6,7 +6,9 @@ TagManager:
   tags:
   - NPC
   - Pico
+  - Alcalde
   - Movible
+
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - 
   - Colisiones
   - Background
-  - 
+  - Player
   - 
   - 
   - 
