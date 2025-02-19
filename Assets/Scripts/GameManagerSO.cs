@@ -44,9 +44,16 @@ public class GameManagerSO : ScriptableObject
 
     public Player CurrentPlayer { get => currentPlayer; set => currentPlayer = value; }
 
+    public SistemaSigilo sistemaSigilo;
+
     private void OnEnable() //Llamadas por EVENTO.
     {
         SceneManager.sceneLoaded += NuevaEscenaCargada;
+    }
+
+
+    private void Awake() {
+        sistemaSigilo = FindObjectOfType<SistemaSigilo>();
     }
 
     private void NuevaEscenaCargada(Scene arg0, LoadSceneMode arg1)
@@ -70,4 +77,11 @@ public class GameManagerSO : ScriptableObject
     {
         OnNewItem?.Invoke(itemData);
     }
+
+
+    // Función para que los enemigos puedan consultar el estado de sigilo del player
+    public bool EstaEnSigilo() {
+        return sistemaSigilo != null && sistemaSigilo.EnSigilo;
+    }
 }
+

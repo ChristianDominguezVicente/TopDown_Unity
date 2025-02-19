@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4466014918114590679}
   - component: {fileID: 7909419565544834593}
+  - component: {fileID: 837511351735693264}
+  - component: {fileID: 5412464788774748341}
   - component: {fileID: 3530945789081177996}
   - component: {fileID: 3841792793722036405}
   - component: {fileID: 4630875894815469244}
@@ -51,6 +53,36 @@ MonoBehaviour:
   gM: {fileID: 11400000, guid: 9cdb5359475115945af6c10134788cf0, type: 2}
   velocidadMovimiento: 5
   radioInteraccion: 0.3
+--- !u!114 &837511351735693264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131725711161812727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a72fe8d7f24c94a936879a7c4cd470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duracionSigilo: 3
+  cooldownSigilo: 10
+  transparencia: 0.3
+  multiplicadorVelocidadSigilo: 1.5
+--- !u!114 &5412464788774748341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131725711161812727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7ab3f3e67f2324b92d1835c30ee7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duracionConfusion: 4
+  multiplicadorVelocidadConfusion: 0.75
 --- !u!212 &3530945789081177996
 SpriteRenderer:
   m_ObjectHideFlags: 0
