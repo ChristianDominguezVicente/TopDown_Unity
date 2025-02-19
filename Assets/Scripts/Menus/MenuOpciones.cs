@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -141,6 +142,20 @@ public class MenuOpciones : MonoBehaviour
     {
         gM.CambiarEstadoPlayer(InventoryUI.activeSelf);
         InventoryUI.SetActive(!InventoryUI.activeSelf);
+
+        string savePath = Application.persistentDataPath + "/save001.txt";
+
+        if (!File.Exists(savePath))
+        {
+            gM.Inventario.MyItems.Clear();
+            foreach (var slot in gM.Inventario.GetSlots())
+            {
+                slot.gameObject.SetActive(false);
+            }
+            ItemDatabase.ClearItems();
+            gM.Inventario.ResetItemsCollected();
+            gM.Items.Clear();
+        }
 
         AsyncOperation operation = SceneManager.LoadSceneAsync("Inicio");
 

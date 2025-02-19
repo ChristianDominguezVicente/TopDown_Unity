@@ -13,7 +13,9 @@ public class PersistentData
     private int currentSceneIndex;
     private float xOrientation, yOrientation;
 
-    public PersistentData(GameManagerSO gM) 
+    private Dictionary<string, int> inventoryItems = new Dictionary<string, int>();
+
+    public PersistentData(GameManagerSO gM)
     {
         monedas = gM.CollectedCoins;
         ultimaPosicionPlayerX = gM.CurrentPlayer.transform.position.x;
@@ -22,6 +24,28 @@ public class PersistentData
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         xOrientation = gM.CurrentPlayer.Anim.GetFloat("inputH");
         yOrientation = gM.CurrentPlayer.Anim.GetFloat("inputV");
+
+        inventoryItems = new Dictionary<string, int>();
+
+        foreach (var item in gM.Inventario.MyItems)
+        {
+            int index = gM.Inventario.MyItems.IndexOf(item);
+            if (index >= 0 && index < gM.Inventario.Slots.Length)
+            {
+                ItemInfo itemInfo = gM.Inventario.Slots[index].GetComponentInChildren<ItemInfo>();
+                if (itemInfo != null)
+                {
+                    if (inventoryItems.ContainsKey(item.itemName))
+                    {
+                        inventoryItems[item.itemName] += itemInfo.ItemCount;
+                    }
+                    else
+                    {
+                        inventoryItems[item.itemName] = itemInfo.ItemCount;
+                    }
+                }
+            }
+        }
     }
 
     public int Monedas { get => monedas; }
@@ -32,4 +56,5 @@ public class PersistentData
 
     public float XOrientation { get => xOrientation; }
     public float YOrientation { get => yOrientation; }
+    public Dictionary<string, int> InventoryItems { get => inventoryItems; }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ public class ItemInfo : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private Vector3 initPosition; //Posición original con la cual nazco.
 
     private ItemSO currentData;
+    public int ItemCount => itemCount;
 
     public Transform InitParent { get => initParent; }
     public Vector3 InitPosition { get => initPosition; }
@@ -37,7 +39,8 @@ public class ItemInfo : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         itemImage.sprite = newItem.icon;
         itemNameText.text = newItem.itemName;
         currentData = newItem;
-        UpdateStackItem();
+        itemCount = 1;
+        itemCountText.text = "x" + itemCount;
     }
 
     //Se ejecuta cuando comenzamos a arrastrar el elemento.
@@ -87,5 +90,11 @@ public class ItemInfo : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             Debug.Log("Utilizo " + currentData.name);
         }
+    }
+
+    public void SetItemCount(int count)
+    {
+        itemCount = count;
+        itemCountText.text = "x" + itemCount;
     }
 }

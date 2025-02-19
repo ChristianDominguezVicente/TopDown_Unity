@@ -16,6 +16,13 @@ public class SaveSystem : MonoBehaviour
 
     [SerializeField] private GameObject menuInicio;
 
+    private MenuInicio menuInicioScript;
+
+    private void Start()
+    {
+        menuInicioScript = FindObjectOfType<MenuInicio>();
+    }
+
     public void OnSaveButtonClicked()
     {
         Save();
@@ -44,6 +51,10 @@ public class SaveSystem : MonoBehaviour
         {
             menuInicio.SetActive(false);
         }
+
+        ItemDatabase.Initialize();
+        SistemaInventario inventario = FindObjectOfType<SistemaInventario>();
+        inventario.RestoreInventory(loadedData.InventoryItems);
     }
 
 
@@ -60,6 +71,11 @@ public class SaveSystem : MonoBehaviour
         formatter.Serialize(stream, dataToSave);
 
         stream.Close();
+
+        if (menuInicioScript != null)
+        {
+            menuInicioScript.UpdateLoadButtons();
+        }
     }
     public PersistentData Load()
     {

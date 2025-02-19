@@ -25,6 +25,20 @@ public class SistemaInventario : MonoBehaviour
 
     private static SistemaInventario instance;
 
+    public ItemSlot[] Slots => slots;
+
+    public ItemSlot[] GetSlots()
+    {
+        return slots;
+    }
+
+    public void ResetItemsCollected()
+    {
+        itemsCollected = 0;
+    }
+
+    public List<ItemSO> MyItems { get => myItems; set => myItems = value; }
+
     private void Awake()
     {
         if (instance == null)
@@ -56,21 +70,19 @@ public class SistemaInventario : MonoBehaviour
 
     private void AddNewItem(ItemSO newItem)
     {
-        if(myItems.Contains(newItem))
+        int indexOfStackItem = myItems.FindIndex(x => x.itemName == newItem.itemName);
+
+        if (indexOfStackItem != -1)
         {
-            //Actualizarlo
-            int indexOfStackItem = myItems.FindIndex(x => x.Equals(newItem));
             itemInfos[indexOfStackItem].UpdateStackItem();
         }
         else
         {
-            myItems.Add(newItem); //Añado nueva información a la lista.
-            slots[itemsCollected].gameObject.SetActive(true); //Enciendo el slot correspondiente
-
+            myItems.Add(newItem);
+            slots[itemsCollected].gameObject.SetActive(true);
             itemInfos[itemsCollected].FeedData(newItem);
-
             itemsCollected++;
-        } 
+        }
     }
 
     // Start is called before the first frame update
@@ -97,5 +109,46 @@ public class SistemaInventario : MonoBehaviour
     private void OnDisable()
     {
         gM.OnNewItem -= AddNewItem;
+    }
+
+    public void RestoreInventory(Dictionary<string, int> inventoryItems)
+    {
+        MyItems.Clear();
+        itemsCollected = 0;
+
+        foreach (var slot in slots)
+        {
+            slot.gameObject.SetActive(false);
+        }
+
+        foreach (var entry in inventoryItems)
+        {
+            string itemName = entry.Key;
+            int quantity = entry.Value;
+
+            ItemSO item = ItemDatabase.GetItemByName(itemName);
+
+            if (item != null)
+            {
+                if (!myItems.Exists(x => x.itemName == item.itemName))
+                {
+                    MyItems.Add(item);
+                    slots[itemsCollected].gameObject.SetActive(true);
+                    itemInfos[itemsCollected].FeedData(item);
+                    itemInfos[itemsCollected].SetItemCount(quantity);
+                    itemsCollected++;
+                }
+            }
+        }
+    }
+
+    public ItemInfo GetItemInfo(ItemSO item)
+    {
+        int index = MyItems.IndexOf(item);
+        if (index >= 0 && index < itemInfos.Length)
+        {
+            return itemInfos[index];
+        }
+        return null;
     }
 }
