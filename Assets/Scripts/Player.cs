@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
+  
     private float inputH;
     private float inputV;
     private bool moviendo;
@@ -17,16 +19,19 @@ public class Player : MonoBehaviour
     [SerializeField] private float radioInteraccion;
 
     private bool interactuando;
+    private bool teclasInvertidas = false;
 
     public bool Interactuando { get => interactuando; set => interactuando = value; }
     public Animator Anim { get => anim; }
+    public float VelocidadMovimiento { get => velocidadMovimiento; set => velocidadMovimiento = value; }
+    public Vector3 UltimoInput { get => ultimoInput; set => ultimoInput = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        gM.CurrentPlayer = this;
+        gameManager.CurrentPlayer = this;
         anim = GetComponent<Animator>();
-        transform.position = gM.NewPosition;
+
         anim.SetFloat("inputH", gM.NewOrientation.x);
         anim.SetFloat("inputV", gM.NewOrientation.y);
     }
@@ -41,12 +46,18 @@ public class Player : MonoBehaviour
 
     private void MovimientoYAnimaciones()
     {
-        //Ejecuto el movimiento sÛlo si estoy en una casilla y sÛlo si hay input.
+        //Ejecuto el movimiento s√≥lo si estoy en una casilla y s√≥lo si hay input.
         if (!interactuando && !moviendo && (inputH != 0 || inputV != 0))
         {
             anim.SetBool("andando", true);
             anim.SetFloat("inputH", inputH);
             anim.SetFloat("inputV", inputV);
+
+            if (teclasInvertidas) {
+                inputH = -inputH;
+                inputV = -inputV;
+            }
+
             //Actualizo cual fue mi ultimo input, cual va a ser mi puntoDestino y cual es mi puntoInteraccion. 
             ultimoInput = new Vector3(inputH, inputV, 0);
             puntoDestino = transform.position + ultimoInput;
@@ -54,10 +65,15 @@ public class Player : MonoBehaviour
 
             colliderDelante = LanzarCheck();
 
-            if (!colliderDelante)
-            {
+            if (!colliderDelante) {
                 StartCoroutine(Mover());
             }
+            else if (colliderDelante.CompareTag("Movible") && colliderDelante.TryGetComponent(out ObjetoMovible objetoMovible)) {
+                if (objetoMovible.IntentarMover(ultimoInput)) {
+                    StartCoroutine(Mover()); // Si el objeto se ha movido, el jugador tambi√©n avanza
+                }
+            }
+
         }
         else if (inputH == 0 && inputV == 0)
         {
@@ -89,7 +105,7 @@ public class Player : MonoBehaviour
             //Compruebo si lo que tengo delante es un iteractuable
             if (colliderDelante.TryGetComponent(out Interactuable interactuable))
             {
-                //Si adem·s de ser interactuable es un item...
+                //Si adem√°s de ser interactuable es un item...
                 if (interactuable.transform.TryGetComponent(out Item item))
                 {
                     //Notifico a gM que tenemos un nuevo item.
@@ -110,7 +126,7 @@ public class Player : MonoBehaviour
         }
         //Ante un nuevo destino, necesito refrescar de nuevo puntoInteraccion.
         puntoInteraccion = transform.position + ultimoInput;
-        moviendo= false;
+        moviendo = false;
     }
     private Collider2D LanzarCheck()
     {
@@ -120,4 +136,9 @@ public class Player : MonoBehaviour
     {
         Gizmos.DrawSphere(puntoInteraccion, radioInteraccion);
     }
+
+    public void InvertirDirecciones(bool invertir) {
+        teclasInvertidas = invertir;
+    }
 }
+

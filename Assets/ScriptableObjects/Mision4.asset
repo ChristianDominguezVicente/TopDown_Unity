@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ceb23645d9fea846bd302544f7a5e7c, type: 3}
+  m_Name: Mision4
+  m_EditorClassIdentifier: 
+  nombre: Mision4
+  lugarEnCanvas: -1
+  numeroFases: 5
+  secundaria: "Terminar la misi\xF3n 4 sin..."
+  secundariaOk: 0
+  secundariaConseguida: {fileID: 21300000, guid: 82f451f081e2a2b4699eb3da763efe40, type: 3}
+  secundariaNoConseguida: {fileID: 21300000, guid: 230d67e43b0434f4ba78c00f15342d9d, type: 3}
