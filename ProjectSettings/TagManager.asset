@@ -6,9 +6,9 @@ TagManager:
   tags:
   - NPC
   - Pico
+  - Enemigo
   - Alcalde
   - Movible
-
   layers:
   - Default
   - TransparentFX
@@ -26,8 +26,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Aliado
+  - Enemigo
   - 
   - 
   - 
