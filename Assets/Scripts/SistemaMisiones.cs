@@ -4,7 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
+
 
 public class SistemaMisiones : MonoBehaviour
 {

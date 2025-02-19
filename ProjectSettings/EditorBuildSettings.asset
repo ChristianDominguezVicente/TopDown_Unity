@@ -14,4 +14,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Inicio.unity
     guid: d40d0275bdf75ec4d9bf34d6d2354446
+  - enabled: 1
+    path: Assets/Scenes/Bosque-1.unity
+    guid: 1d997b944d6143e4eba6f54efb9b9dcf
+  - enabled: 1
+    path: Assets/Scenes/Bosque-2.unity
+    guid: b682d6ad055e74c48be347d6e5dc138b
+  - enabled: 1
+    path: Assets/Scenes/Mazmorra-1.unity
+    guid: 65cc62f851a4b3045aa2bb9782bbf719
+  - enabled: 1
+    path: Assets/Scenes/Mazmorra-2.unity
+    guid: fe533e98b9a97594595b97f182f85bf2
+  - enabled: 1
+    path: Assets/Scenes/MundoFrio.unity
+    guid: 7ac452b028269564095d85737765462d
+  - enabled: 1
+    path: Assets/Scenes/MundoLuces.unity
+    guid: 2423968ee7df16246b6ff638131b7dc5
+  - enabled: 1
+    path: Assets/Scenes/MundoLuces 1.unity
+    guid: 1fd4e29bc9a596b458f463641cdae659
+  - enabled: 1
+    path: Assets/Scripts/Combate/PrefabsCombate/NivelCombate1.unity
+    guid: 7a020819173c6c745b2894267710524a
+  - enabled: 1
+    path: Assets/Scripts/Combate/PrefabsCombate/NivelCombate2.unity
+    guid: f9f108aef2de67f42a652748126c5ea8
   m_configObjects: {}

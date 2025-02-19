@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager.CurrentPlayer = this;
+        gM.CurrentPlayer = this;
         anim = GetComponent<Animator>();
 
         anim.SetFloat("inputH", gM.NewOrientation.x);
