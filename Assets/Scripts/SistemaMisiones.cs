@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.Rendering.DebugUI;
 
 
 public class SistemaMisiones : MonoBehaviour
@@ -27,7 +30,7 @@ public class SistemaMisiones : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) && "Inicio" != SceneManager.GetActiveScene().name)
         {
             sistemaMisiones.SetActive(!sistemaMisiones.activeSelf);
         }

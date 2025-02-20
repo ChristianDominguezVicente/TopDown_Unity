@@ -40,14 +40,14 @@ public class SaveSystem : MonoBehaviour
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(loadedData.CurrentSceneIndex);
 
-        yield return new WaitUntil( ()=> operation.isDone);
+        yield return new WaitUntil(() => operation.isDone);
 
         textoMonedas.text = "Coins: " + loadedData.Monedas;
         gM.CurrentPlayer.transform.position = new Vector3(loadedData.UltimaPosicionPlayerX, loadedData.UltimaPosicionPlayerY);
         gM.CurrentPlayer.Anim.SetFloat("inputH", loadedData.XOrientation);
         gM.CurrentPlayer.Anim.SetFloat("inputV", loadedData.YOrientation);
 
-        if("Inicio" != SceneManager.GetActiveScene().name)
+        if ("Inicio" != SceneManager.GetActiveScene().name)
         {
             menuInicio.SetActive(false);
         }

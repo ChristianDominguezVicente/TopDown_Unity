@@ -6381,6 +6381,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuInicio: {fileID: 8603843923672854410}
+  loadButtons:
+  - {fileID: 6115944975431406522}
+  - {fileID: 2314505615988268805}
 --- !u!1 &5607261349266738381
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,17 +12,18 @@ public class Mision : MonoBehaviour, Interactuable
     [SerializeField] private MisionSO misDatos;
     void Interactuable.Interactuar()
     {
-        if (gameManager.EstadoMisiones[numeroMision] < misDatos.numeroFases)
+        if (gameManager.EstadoMisiones[numeroMision] > -1 && gameManager.EstadoMisiones[numeroMision] < misDatos.numeroFases)
         {
             gameManager.EstadoMisiones[numeroMision]++;
             gameManager.Logros.ActualizarMision(misDatos, gameManager.EstadoMisiones[numeroMision]);
+            Destroy(gameObject);
         }
         if (misDatos.numeroFases == gameManager.EstadoMisiones[numeroMision])
         {
             gameManager.MisionAcabada[numeroMision] = true;
             Debug.Log("Acabaste la misión número: " + numeroMision);
         }
-
+        
     }
 
     // Start is called before the first frame update

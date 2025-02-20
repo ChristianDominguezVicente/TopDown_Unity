@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: "Misi\xF3n2"
   lugarEnCanvas: -1
-  numeroFases: 4
+  numeroFases: 2
   secundaria: "Terminar la misi\xF3n 2 con..."
   secundariaOk: 0
   secundariaConseguida: {fileID: 21300000, guid: 82f451f081e2a2b4699eb3da763efe40, type: 3}

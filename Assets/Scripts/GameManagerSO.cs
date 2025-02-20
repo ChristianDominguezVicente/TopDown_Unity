@@ -59,12 +59,14 @@ public class GameManagerSO : ScriptableObject
     private void NuevaEscenaCargada(Scene arg0, LoadSceneMode arg1)
     {
         myPlayer = FindObjectOfType<Player>();
+        currentPlayer = FindObjectOfType<Player>();
         inventario = FindObjectOfType<SistemaInventario>();
         logros = FindObjectOfType<SistemaMisiones>();
     }
     public void CambiarEstadoPlayer(bool estado)
     {
         myPlayer.Interactuando = !estado;
+        currentPlayer.Interactuando = !estado;
     }
     public void LoadNewScene(Vector3 newPosition, Vector2 newOrientation, int newSceneIndex)
     {

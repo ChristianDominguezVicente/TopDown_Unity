@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     {
         gM.CurrentPlayer = this;
         anim = GetComponent<Animator>();
-
+        transform.position = gM.NewPosition;
         anim.SetFloat("inputH", gM.NewOrientation.x);
         anim.SetFloat("inputV", gM.NewOrientation.y);
     }
