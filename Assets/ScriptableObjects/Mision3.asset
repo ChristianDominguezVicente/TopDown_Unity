@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ceb23645d9fea846bd302544f7a5e7c, type: 3}
   m_Name: Mision3
   m_EditorClassIdentifier: 
-  nombre: Mision3
+  nombre: Cactus
   lugarEnCanvas: -1
   numeroFases: 4
   secundaria: "Terminar la misi\xF3n 3 sin..."

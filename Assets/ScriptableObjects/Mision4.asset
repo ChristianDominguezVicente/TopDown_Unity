@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ceb23645d9fea846bd302544f7a5e7c, type: 3}
   m_Name: Mision4
   m_EditorClassIdentifier: 
-  nombre: Mision4
+  nombre: Piedra Morada
   lugarEnCanvas: -1
   numeroFases: 1
   secundaria: "Terminar la misi\xF3n 4 sin..."
